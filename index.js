@@ -2,17 +2,7 @@
     // ## Array Cardio Day 1
 
     // Some data we can work with
-
-    const objectArray = [
-      {name: "first", num: 5},
-      {name: "sec", num: 1},
-      {name: "th", num: 44},
-      {name: "fo", num: 32},
-      {name: "fi", num: 22},
-      {name: "si", num: 21},
-      {name: "se", num: 54}
-    ]
-    const inventors = [
+    const getInventors = () => [
       { first: 'Albert', last: 'Einstein', year: 1879, passed: 1955 },
       { first: 'Isaac', last: 'Newton', year: 1643, passed: 1727 },
       { first: 'Galileo', last: 'Galilei', year: 1564, passed: 1642 },
@@ -38,7 +28,7 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
-    const sixteenthInventors = inventors.filter (inventor => {
+    const sixteenthInventors = getInventors().filter (inventor => {
       return inventor.year > 1499 && inventor.year < 1600;
     });
 
@@ -47,7 +37,7 @@
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
 
-    const inventorsArray = inventors.map(inventor => {
+    const inventorsArray = getInventors().map(inventor => {
       return `${inventor.first} ${inventor.last}`;
     });
 
@@ -57,24 +47,31 @@
     // 3. Sort the inventors by birthdate, oldest to youngest
 
     console.log("this")
-    const inventorsByYear = inventors.sort(function(a, b) {
+    const inventorsByYear = getInventors().sort(function(a, b) {
       return a.year - b.year;
     });
     console.log(inventorsByYear)
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
-    const inventorAges = [];
-    inventors.forEach(inventor => {
-      inventorAges.push(inventor.passed - inventor.year);
-    });
-    const totalYears = inventorAges.reduce((a, v) => {
-      return a + v;
-    });
+    // const inventorAges = [];
+    // getInventors().forEach(inventor => {
+    //   inventorAges.push(inventor.passed - inventor.year);
+    // });
+    // const totalYears = inventorAges.reduce((a, v) => {
+    //   return a + v;
+    // });
+
+    // A shorter version:
+    const totalYears = getInventors().reduce((total, inventor) => {
+      return total + (inventor.passed - inventor.year);
+    }, 0);
 
     console.log(totalYears);
+
+    // console.log(totalYears);
     // 5. Sort the inventors by years lived
-    const inventorsByYearsLived = inventors.sort(function(a,b) {
+    const inventorsByYearsLived = getInventors().sort(function(a,b) {
       return (a.passed - a.year) - (b.passed - b.year);
     });
 
@@ -82,8 +79,13 @@
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // Some stuff here
 
-
+    const links = document.querySelectorAll('.mw-category-group a');
+    const linksArray = Array.from(links);
+    const de = linksArray
+                          .map(link => link.textContent)
+                          .filter(streetName => streetName.includes(" de "));
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
