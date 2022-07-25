@@ -88,7 +88,30 @@
                           .filter(streetName => streetName.includes(" de "));
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sorted = people.sort();
+    console.log(sorted);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const sums = {};
+    data.forEach(item => {
+      if (item in sums) {
+        sums[item] += 1;
+      } else {
+        sums[item] = 1;
+      }
+    });
+
+    console.log(sums)
+
+    // another way to do this:
+    const sumsAlt = data.reduce((obj, item) => {
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+
+    console.log(sumsAlt);
